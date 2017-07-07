@@ -17,16 +17,38 @@
     
     
     
-    <!--HTML элемент, который будет иметь заполнитель дд.мм.гггг -->
-<input  id="date" type="text">
-<!--HTML элемент, который будет иметь в качестве заполнителя пробел -->
-<input  id="index" type="text">
+<div class="form-group">
+  <label for="phone">Телефон: </label>
+  <select id="country" class="form-control">
+    <option value="ru"><img src="">Россия +7</option>
+    <option value="ua">Украина +380</option>
+    <option value="by">Белоруссия +375</option>
+  </select>
+  <input id="phone" type="text" class="form-control">
+</div>
+ 
 <script>
-$(function() {
-  //задание заполнителя с помощью параметра placeholder
-  $("#date").mask("99.99.9999", {placeholder: "дд.мм.гггг" });
-  //задание заполнителя с помощью параметра placeholder
-  $("#index").mask("999999", {placeholder: " " });
+jQuery (function ($) {  
+  $(function() {
+    function maskPhone() {
+      var country = $('#country option:selected').val();
+      switch (country) {
+        case "ru":
+          $("#phone").mask("+7(999) 999-99-99");
+          break;
+        case "ua":
+          $("#phone").mask("+380(999) 999-99-99");
+          break;
+        case "by":
+          $("#phone").mask("+375(999) 999-99-99");
+          break;          
+      }    
+    }
+    maskPhone();
+    $('#country').change(function() {
+      maskPhone();
+    });
+  });
 });
 </script>
     
